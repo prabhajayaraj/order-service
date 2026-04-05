@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         AWS_REGION = "us-east-1"
-        ECR_REPO = "arun-backend-orderservice"
+        ECR_REPO = "surya-user-service"
         ECS_CLUSTER = "arun-dev-cluster"
         ECS_SERVICE = "arun-order-service-service"
         TASK_DEF_NAME = "arun-order-service"
