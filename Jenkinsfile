@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = "us-east-1"
         ECR_REPO = "surya-order-service"
-        ECS_CLUSTER = "user-service-surya"
+        ECS_CLUSTER = "surya-dev-cluster"
         ECS_SERVICE = "surya-order-service-1"
         TASK_DEF_NAME = "surya-order-service"
         IMAGE_TAG = "${BUILD_NUMBER}"
