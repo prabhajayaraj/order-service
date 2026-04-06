@@ -20,19 +20,7 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("Request Origin:", origin);
-
-    // allow server-to-server or Postman
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    console.warn("❌ CORS blocked for:", origin);
-    return callback(null, false); // safer than throwing error
-  },
+  origin: "*",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -44,6 +32,13 @@ app.options("*", cors(corsOptions)); // handle preflight
 // ================= MIDDLEWARE =================
 app.use(express.json());
 app.use(compression());
+
+app.use((req, res, next) => {
+  if (req.url.startsWith("/api/order-service")) {
+    req.url = req.url.replace("/api/order-service", "");
+  }
+  next();
+});
 
 // Allow private network access (Chrome requirement sometimes)
 app.use((req, res, next) => {
